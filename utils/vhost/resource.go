@@ -18,11 +18,11 @@ var (
 	<head>
 		<meta charset="UTF-8">
 		<title>凌云FRP-无法找到您所请求的网站</title>
-		<link rel="stylesheet" href="https://frp.lybyte.cn/assets/frp/style.css">
-		<link rel="shortcut icon" href="https://frp.lybyte.cn/favicon.ico" type="image/x-icon">
-		<script src="https://frp.lybyte.cn/assets/frp/prefixfree.min.js"></script>
-		<script src="https://frp.lybyte.cn/assets/frp/jquery.min.js"></script>
-		<script src="https://frp.lybyte.cn/assets/frp/script.js"></script>
+		<link rel="stylesheet" href="https://lyfrp.cn/assets/frp/style.css">
+		<link rel="shortcut icon" href="https://lyfrp.cn/favicon.ico" type="image/x-icon">
+		<script src="https://lyfrp.cn/assets/frp/prefixfree.min.js"></script>
+		<script src="https://lyfrp.cn/assets/frp/jquery.min.js"></script>
+		<script src="https://lyfrp.cn/assets/frp/script.js"></script>
 		<style>
 			body {
 				margin: 0;
@@ -62,12 +62,12 @@ var (
 					<div class="slice" aria-hidden="true" style="--j: 5"></div>
 					<div class="slice" aria-hidden="true" style="--j: 6"></div>
 					<div class="slice" aria-hidden="true" style="--j: 7"></div>
-				</section><a class="det grid c--fin fade" href="https://frp.lybyte.cn">访问凌云FRP</a>
+				</section><a class="det grid c--fin fade" href="https://lyfrp.cn">访问凌云FRP</a>
 			</article>
 			<article class="grid" id="a1" style="--i: 1">
 				<h3 class="c--ini fade">可能的原因</h3>
 				<p class="c--ini fade">1：您尚未启动映射。2：错误的本地端口。3：错误的外网端口。4：映射协议错误。5：nginx或apache或iis错误</p><a
-					class="nav c--ini fade" href="https://frp.lybyte.cn">Next</a>
+					class="nav c--ini fade" href="https://lyfrp.cn">Next</a>
 				<section class="grid c--fin" role="img" aria-label="错误页面随机图片"
 					style="--img: url(https://uapis.cn/api/imgapi/bq/maomao.php); --m: 8">
 					<div class="slice" aria-hidden="true" style="--j: 0"></div>
@@ -78,11 +78,11 @@ var (
 					<div class="slice" aria-hidden="true" style="--j: 5"></div>
 					<div class="slice" aria-hidden="true" style="--j: 6"></div>
 					<div class="slice" aria-hidden="true" style="--j: 7"></div>
-				</section><a class="det grid c--fin fade" href="https://frp.lybyte.cn">访问凌云FRP</a>
+				</section><a class="det grid c--fin fade" href="https://lyfrp.cn">访问凌云FRP</a>
 			</article>
 		</main>
 	</body>
-	<script src="https://frp.lybyte.cn/assets/frp/frp.js"></script>
+	<script src="https://lyfrp.cn/assets/frp/frp.js"></script>
 	<script>
 		var canvas = document.getElementById("myCanvas");
 		var ctx = canvas.getContext("2d");

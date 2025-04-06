@@ -9,16 +9,16 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
 
 package proxy
 
 import (
+	"bufio"
 	"fmt"
 	"io"
 	"net"
 	"strconv"
+	"strings"
 	"sync"
 	"time"
 
@@ -202,6 +202,31 @@ func NewProxy(runId string, rc *controller.ResourceController, statsCollector st
 // It can be used for tcp, http, https type.
 func HandleUserTcpConnection(pxy Proxy, userConn frpNet.Conn, statsCollector stats.Collector) {
 	defer userConn.Close()
+	// 新增协议检测逻辑
+	buf := make([]byte, 512)
+	reader := bufio.NewReader(userConn)
+	n, err := reader.Read(buf)
+	if err != nil && err != bufio.ErrBufferFull && err != io.EOF {
+		pxy.Error("peek error: %v", err)
+		return
+	}
+	if n > 0 {
+		header := strings.ToLower(string(buf[:n]))
+
+		// 检测HTTP特征
+		if strings.HasPrefix(header, "get ") ||
+			strings.HasPrefix(header, "post ") ||
+			strings.HasPrefix(header, "put ") {
+			pxy.Warn("HTTP protocol detected, closing connection")
+			return
+		}
+
+		// 检测HTTPS特征（TLS ClientHello）
+		if buf[0] == 0x16 && buf[1] == 0x03 && buf[2] >= 0x00 && buf[2] <= 0x03 {
+			pxy.Warn("HTTPS/TLS protocol detected, closing connection")
+			return
+		}
+	}
 
 	// try all connections from the pool
 	workConn, err := pxy.GetWorkConnFromPool(userConn.RemoteAddr(), userConn.LocalAddr())
@@ -268,7 +293,7 @@ func NewProxyManager() *ProxyManager {
 func (pm *ProxyManager) Add(name string, pxy Proxy) error {
 	pm.mu.Lock()
 	defer pm.mu.Unlock()
-	
+
 	// 这里的判断没什么必要了，因为前面已经经过鉴权，如果出现两个相同名字的代理就用新的代替旧的
 	/*if _, ok := pm.pxys[name]; ok {
 		return fmt.Errorf("proxy name [%s] is already in use", name)

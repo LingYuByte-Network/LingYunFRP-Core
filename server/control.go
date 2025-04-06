@@ -440,7 +440,7 @@ func (ctl *Control) manager() {
 
 func (ctl *Control) RegisterProxy(pxyMsg *msg.NewProxy) (remoteAddr string, err error) {
 	var pxyConf config.ProxyConf
-
+	//
 	s, err := api.NewService(g.GlbServerCfg.ApiBaseUrl)
 	var workConn proxy.GetWorkConnFn = ctl.GetWorkConn
 
